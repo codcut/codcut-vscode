@@ -1,14 +1,16 @@
 import * as vscode from 'vscode';
 import Authenticator from './lib/Authenticator';
+import StatusBarLabel from './StatusBarLabel';
 
-let statusBarItem: vscode.StatusBarItem;
+const SBLabel = new StatusBarLabel();
 
 export function activate(context: vscode.ExtensionContext) {
+	const { globalState } = context;
 	
 	// Create the login command
 	const loginCommand = 'extension.login';
 	context.subscriptions.push(vscode.commands.registerCommand(loginCommand, () => {
-		if (context.globalState.get('token')) {
+		if (globalState.get('token')) {
 			return;
 		}
 
@@ -16,16 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
 			.start()
 			.then((token) => {
 				context.globalState.update('token', token);
-				statusBarItem.text = 'Codcut';
+				SBLabel.setText('Codcut');
 			});
 	}));
 
 	// Create the status bar item
-	statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-	statusBarItem.command = loginCommand;
-	statusBarItem.text = context.globalState.get('token') ? 'Codcut' : 'Codcut - login';
-	context.subscriptions.push(statusBarItem);
-	statusBarItem.show();
+	SBLabel.setText(globalState.get('token') ? 'Codcut' : 'Codcut - login');
+	SBLabel.setCommand(loginCommand);
+	context.subscriptions.push(SBLabel.instance);
 }
 
 export function deactivate() {}
