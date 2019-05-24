@@ -1,17 +1,11 @@
 import * as vscode from 'vscode';
-import fetch from 'node-fetch';
-
-interface IShareInputParams {
-  code: string;
-  language: string;
-  body: string;
-}
+import { ICreatePostParams, createPostReq } from './utils/api';
 
 class ShareInput {
   MAX_DESCRIPTION_LENGTH = 500;
   MIN_CODE_LENGTH = 5;
 
-  params: IShareInputParams = {
+  params: ICreatePostParams = {
     code: '',
     language: '',
     body: ''
@@ -19,7 +13,7 @@ class ShareInput {
 
   token: string;
   
-  constructor(params: Partial<IShareInputParams>, token: string) {
+  constructor(params: Partial<ICreatePostParams>, token: string) {
     this.params = {
       ...this.params,
       ...params
@@ -63,13 +57,22 @@ class ShareInput {
   }
 
   _share() {
-    const { params } = this;
+    const { params, token } = this;
     
     if (!params.code || !params.language || typeof params.body !== 'string') {
       return;
     }
 
-    console.log(params);
+    createPostReq(params, token)
+      .then(res => {
+        if (res.ok) {
+          vscode.window.showInformationMessage('Code shared successfully!');
+        }
+        else {
+          vscode.window.showErrorMessage('There are problems with our servers, retry in a few minutes :(');
+        }
+      })
+    .catch(() => vscode.window.showErrorMessage('Something went wrong, check your connection :('));
   }
 }
 
