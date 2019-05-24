@@ -18,8 +18,23 @@
 			{
 				"command": "extension.login",
 				"title": "Codcut login"
+			},
+
+			{
+				"command": "extension.share",
+				"title": "Share to Codcut"
 			}
-		]
+		],
+
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorHasSelection",
+					"command": "extension.share",
+					"group": "codcut"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
