@@ -9,7 +9,7 @@ interface IShareInputParams {
 
 class ShareInput {
   MAX_DESCRIPTION_LENGTH = 500;
-  MIN_DESCRIPTION_LENGTH = 5;
+  MIN_CODE_LENGTH = 5;
 
   params: IShareInputParams = {
     code: '',
@@ -29,9 +29,9 @@ class ShareInput {
   }
 
   open() {
-    const { MAX_DESCRIPTION_LENGTH, MIN_DESCRIPTION_LENGTH, params } = this;
+    const { MAX_DESCRIPTION_LENGTH, MIN_CODE_LENGTH, params } = this;
 
-    if (params.code.length < MIN_DESCRIPTION_LENGTH) {
+    if (params.code.length < MIN_CODE_LENGTH) {
 			return;
 		}
 
@@ -65,7 +65,7 @@ class ShareInput {
   _share() {
     const { params } = this;
     
-    if (!params.code || !params.language || !params.body) {
+    if (!params.code || !params.language || typeof params.body !== 'string') {
       return;
     }
 
