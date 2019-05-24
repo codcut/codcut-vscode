@@ -16,8 +16,18 @@
 	"contributes": {
 		"commands": [
 			{
+				"command": "extension.menu",
+				"title": "Codcut menu"
+			},
+
+			{
 				"command": "extension.login",
 				"title": "Codcut login"
+			},
+
+			{
+				"command": "extension.logout",
+				"title": "Codcut logout"
 			},
 
 			{

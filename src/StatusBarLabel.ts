@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { TToken } from './extension';
 
 class StatusBarLabel {
   statusBarItem: vscode.StatusBarItem;
@@ -12,8 +13,13 @@ class StatusBarLabel {
     this.statusBarItem.command = command;
   }
 
-  setText(text: string) {
-    this.statusBarItem.text = text;
+  updateText(token: TToken) {
+    if (token) {
+      this.statusBarItem.text = 'Codcut';
+    }
+    else {
+      this.statusBarItem.text = 'Codcut - login';
+    }
   }
 
   get instance() {

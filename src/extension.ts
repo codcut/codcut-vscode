@@ -2,14 +2,32 @@ import * as vscode from 'vscode';
 import Authenticator from './lib/Authenticator';
 import StatusBarLabel from './StatusBarLabel';
 import ShareInput from './ShareInput';
+import MainMenu from './MainMenu';
+
+export type TToken = string | undefined;
+
+const menuCommand = 'extension.menu';
+const loginCommand = 'extension.login';
+const logoutCommand = 'extension.logout';
+const shareCommand = 'extension.share';
 
 const SBLabel = new StatusBarLabel();
 
+const MMenu = new MainMenu([
+	{ label: 'Login', command: loginCommand, isVisible: token => !token},
+	{ label: 'Logout', command: logoutCommand, isVisible: token => !!token}
+]);
+
 export function activate(context: vscode.ExtensionContext) {
 	const { globalState } = context;
+
+	// Handle the menu command
+	context.subscriptions.push(vscode.commands.registerCommand(menuCommand, () => {
+		const token = globalState.get<string>('token');
+		MMenu.show(token);
+	}));
 	
 	// Handle the login command
-	const loginCommand = 'extension.login';
 	context.subscriptions.push(vscode.commands.registerCommand(loginCommand, () => {
 		if (globalState.get<string>('token')) {
 			return;
@@ -19,17 +37,27 @@ export function activate(context: vscode.ExtensionContext) {
 			.start()
 			.then((token) => {
 				context.globalState.update('token', token);
-				SBLabel.setText('Codcut');
+				SBLabel.updateText(token);
 			});
 	}));
 
+	// Handle the logout command
+	context.subscriptions.push(vscode.commands.registerCommand(logoutCommand, () => {
+		globalState.update('token', undefined);
+		SBLabel.updateText(undefined);
+	}));
+
 	// Handle the share command
-	const shareCommand = 'extension.share';
 	context.subscriptions.push(vscode.commands.registerCommand(shareCommand, () => {
 		const editor = vscode.window.activeTextEditor;
 		const token = globalState.get<string>('token');
 		
-		if (!editor || !token) {
+		if (!editor) {
+			return;
+		}
+
+		if (!token) {
+			vscode.window.showWarningMessage('You are not logged in');
 			return;
 		}
 
@@ -45,8 +73,8 @@ export function activate(context: vscode.ExtensionContext) {
 	}));
 
 	// Create the status bar item
-	SBLabel.setText(globalState.get('token') ? 'Codcut' : 'Codcut - login');
-	SBLabel.setCommand(loginCommand);
+	SBLabel.updateText(globalState.get<string>('token'));
+	SBLabel.setCommand(menuCommand);
 	context.subscriptions.push(SBLabel.instance);
 }
 
