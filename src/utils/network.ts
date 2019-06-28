@@ -13,6 +13,7 @@ export function makeRequest(endpoint: string, method: TMethod, body: string = ''
     headers['Authorization'] = `Bearer ${token}`;
   }
 
+
   return fetch(endpoint, {
     method: method,
     headers: headers,

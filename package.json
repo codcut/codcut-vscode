@@ -14,28 +14,37 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Codcut configuration options",
+			"properties": {
+				"codcut.token": {
+					"type": [
+						"string"
+					],
+					"default": "",
+					"description": "Specifies the access token directly linked to your account"
+				}
+			}
+		},
 		"commands": [
 			{
 				"command": "extension.menu",
 				"title": "Codcut menu"
 			},
-
 			{
 				"command": "extension.login",
 				"title": "Codcut login"
 			},
-
 			{
 				"command": "extension.logout",
 				"title": "Codcut logout"
 			},
-
 			{
 				"command": "extension.share",
 				"title": "Share to Codcut"
 			}
 		],
-
 		"menus": {
 			"editor/context": [
 				{
@@ -69,7 +78,6 @@
 		"crypto-js": "^3.1.9-1",
 		"express": "^4.17.0",
 		"jwt-decode": "^2.2.0",
-		"node-fetch": "^2.6.0",
-		"query-string": "^6.5.0"
+		"node-fetch": "^2.6.0"
 	}
 }
