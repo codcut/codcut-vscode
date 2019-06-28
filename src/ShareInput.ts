@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { ICreatePostParams, createPostReq } from './utils/api';
+import { POST_PREVIEW_ENDPOINT } from './utils/config';
 
 class ShareInput {
   MAX_DESCRIPTION_LENGTH = 500;
@@ -64,15 +65,28 @@ class ShareInput {
     }
 
     createPostReq(params, token)
-      .then(res => {
+      .then((res) => {
         if (res.ok) {
-          vscode.window.showInformationMessage('Code shared successfully!');
+          return res.json();
         }
-        else {
-          vscode.window.showErrorMessage('There are problems with our servers, retry in a few minutes :(');
-        }
+
+        vscode.window.showErrorMessage('There are problems with our servers, retry in a few minutes :(');
+        return undefined;
       })
-    .catch(() => vscode.window.showErrorMessage('Something went wrong, check your connection :('));
+      .then((json) => json ? json.id : undefined)
+      .then((id) => this._handleConfirmation(id))
+      .catch(() => vscode.window.showErrorMessage('Something went wrong, check your connection :('));
+  }
+
+  _handleConfirmation(postId: number | undefined) {
+    vscode.window.showInformationMessage('Code shared successfully!', 'Open in your browser')
+      .then((action) => {
+        if (!action || postId === undefined) {
+          return;
+        }
+
+        vscode.env.openExternal(vscode.Uri.parse(`${POST_PREVIEW_ENDPOINT}/${postId}`));
+      });
   }
 }
 
