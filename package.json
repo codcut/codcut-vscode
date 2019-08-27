@@ -3,6 +3,8 @@
 	"displayName": "codcut-vscode",
 	"description": "Share pieces of your code to Codcut.",
 	"version": "0.0.1",
+	"publisher": "Codcut",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.34.0"
 	},
