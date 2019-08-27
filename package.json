@@ -3,7 +3,7 @@
 	"displayName": "codcut-vscode",
 	"description": "Share pieces of your code to Codcut.",
 	"version": "0.0.1",
-	"publisher": "Codcut",
+	"publisher": "codcut",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
