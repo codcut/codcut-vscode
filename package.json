@@ -2,9 +2,10 @@
 	"name": "codcut-vscode",
 	"displayName": "codcut-vscode",
 	"description": "Share pieces of your code to Codcut.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "codcut",
 	"license": "MIT",
+	"icon": "src/images/icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/codcut/codcut-vscode.git"
