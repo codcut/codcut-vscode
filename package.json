@@ -5,7 +5,7 @@
 	"version": "0.0.1",
 	"publisher": "codcut",
 	"license": "MIT",
-	"icon": "src/images/icon.png",
+	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/codcut/codcut-vscode.git"
