@@ -9,7 +9,7 @@ const shareCommand = 'extension.codcut-share';
 export function activate(context: vscode.ExtensionContext) {
 
 	// Handle the share command
-	context.subscriptions.push(vscode.commands.registerCommand(shareCommand, () => {
+	const shareSub = vscode.commands.registerCommand(shareCommand, () => {
 		const editor = vscode.window.activeTextEditor;
 		const token = getToken();
 		
@@ -32,7 +32,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 		new ShareInput(partialParams, token)
 			.open();
-	}));
+	});
+
+	context.subscriptions.push(shareSub);
 }
 
 export function deactivate() {}

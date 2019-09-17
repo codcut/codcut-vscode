@@ -70,9 +70,6 @@
 		"vscode": "^1.1.28"
 	},
 	"dependencies": {
-		"crypto-js": "^3.1.9-1",
-		"express": "^4.17.0",
-		"jwt-decode": "^2.2.0",
 		"node-fetch": "^2.6.0"
 	}
 }
