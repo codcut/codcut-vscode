@@ -4,7 +4,7 @@ import { POST_PREVIEW_ENDPOINT } from './utils/config';
 
 class ShareInput {
   MAX_DESCRIPTION_LENGTH = 500;
-  MIN_CODE_LENGTH = 5;
+  MIN_CODE_LENGTH = 1;
 
   params: ICreatePostParams = {
     code: '',
@@ -27,6 +27,7 @@ class ShareInput {
     const { MAX_DESCRIPTION_LENGTH, MIN_CODE_LENGTH, params } = this;
 
     if (params.code.length < MIN_CODE_LENGTH) {
+      vscode.window.showWarningMessage('The code is too short');
 			return;
 		}
 
@@ -61,6 +62,7 @@ class ShareInput {
     const { params, token } = this;
     
     if (!params.code || !params.language || typeof params.body !== 'string') {
+      vscode.window.showErrorMessage('Something went wrong');
       return;
     }
 
