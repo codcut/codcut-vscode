@@ -1,6 +1,6 @@
 {
-	"name": "codcut-vscode",
-	"displayName": "codcut-vscode",
+	"name": "Codcut",
+	"displayName": "Codcut",
 	"description": "Share pieces of your code to Codcut.",
 	"version": "0.1.3",
 	"publisher": "codcut",
