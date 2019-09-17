@@ -4,7 +4,7 @@ import { getToken } from './utils/token';
 
 export type TToken = string | undefined;
 
-const shareCommand = 'extension.share';
+const shareCommand = 'extension.codcut-share';
 
 export function activate(context: vscode.ExtensionContext) {
 

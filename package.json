@@ -17,7 +17,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.share"
+		"onCommand:extension.codcut-share"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -36,7 +36,7 @@
 		},
 		"commands": [
 			{
-				"command": "extension.share",
+				"command": "extension.codcut-share",
 				"title": "Share to Codcut"
 			}
 		],
@@ -44,7 +44,7 @@
 			"editor/context": [
 				{
 					"when": "editorHasSelection",
-					"command": "extension.share",
+					"command": "extension.codcut-share",
 					"group": "codcut"
 				}
 			]
