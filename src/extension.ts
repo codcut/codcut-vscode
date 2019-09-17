@@ -14,6 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 		const token = getToken();
 		
 		if (!editor) {
+			vscode.window.showWarningMessage('Something went wrong');
 			return;
 		}
 
