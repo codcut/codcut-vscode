@@ -2,7 +2,7 @@
 	"name": "codcut-vscode",
 	"displayName": "codcut-vscode",
 	"description": "Share pieces of your code to Codcut.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"publisher": "codcut",
 	"license": "MIT",
 	"icon": "images/icon.png",
