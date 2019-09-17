@@ -2,7 +2,7 @@
 	"name": "Codcut",
 	"displayName": "Codcut",
 	"description": "Share pieces of your code to Codcut.",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"publisher": "codcut",
 	"license": "MIT",
 	"icon": "images/icon.png",
