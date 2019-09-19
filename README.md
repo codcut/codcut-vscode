@@ -1,9 +1,9 @@
 # Codcut VSCode plugin
 
-## Installation
+## :electric_plug: Installation	
 Install this plugin through the *Marketplace*.
 
-## Usage
+## :video_game: Usage
 1) Get a Codcut token from the app: **Your profile** ➡ **Settings** ➡ **Generate a token**;
 2) Set your Codcut token through `codcut.token` in the settings;
 3) Highlight some code;
